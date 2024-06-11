@@ -19,7 +19,7 @@ public class BoardDTO {
 
 	int no;
 	String title;
-	String contetn;
+	String content;
 	String writer;
 	LocalDateTime regDate;
 	LocalDateTime modDate;
