@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,37 @@ public class BoardServiceImpl implements BoardService {
 						.collect(Collectors.toList());
 		
 		return dtoList; // DTO 리스트 반환
+		
+	}
+
+	@Override
+	public BoardDTO read(int no) {
+		
+		Optional<Board> result = repository.findById(no);
+		
+		if(result.isPresent()) {
+			Board board = result.get();
+			BoardDTO boardDTO = entityToDto(board); // entity -> dto
+			return boardDTO;
+		} else {
+			return null;			
+		}
+		
+	}
+
+	@Override
+	public void modify(BoardDTO dto) {
+		
+		Optional<Board> result = repository.findById(dto.getNo());
+		// 확인하고 저장해야하는 이유: 같은 화면을 공유 중인 두 사용자가 한명은 삭제 한명은 수정 할때 오류 발생을 잡기 위해
+		if(result.isPresent()) {
+			// 제목과 내용만 변경(사용자가 바꿀 수 있는 데이터)
+			Board entity = result.get();
+			entity.setTitle(dto.getTitle());
+			entity.setContent(dto.getContent());
+			// 게시물 교체하기
+			repository.save(entity);
+		}
 		
 	}
 

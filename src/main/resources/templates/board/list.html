@@ -36,8 +36,38 @@
     </tbody>
 
 </table>
+<!-- 타임리프안에서 인라인 속성 사용시 th:inline -->
+<script th:inline="javascript">
+
+	// jquery 라이브러리
+	// document: html 문서를 담는 객체
+	// ready(): 문서가 로드가 될 때 이벤트 처리
+	$(document).ready(function(){
+		
+		// 인라인 속성을 사용하여 타입 처리
+		// 전달받은 값을 모달창으로 출력
+		// 서버에서 전달한 처리결과를 msg변수에 저장
+		// 글번호가 있는지 확인 
+		var msg = [[${msg}]];
+		
+		if(msg != null) {
+			alert(msg + "번 글이 등록되었습니다.");
+		}
+		
+	});
+
+</script>
 
    </th:block>
 
 </th:block>
+
+
+
+
+
+
+
+
+
 
