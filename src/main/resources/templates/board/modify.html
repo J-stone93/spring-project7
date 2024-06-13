@@ -67,14 +67,17 @@
 		$(".listBtn").click(function(){
 		
 			
-			form.attr("action", "/board/modify").attr("method", "get").submit();
+			form.attr("action", "/board/list").attr("method", "get").submit();
 			
 		});
 		
 		$(".removeBtn").click(function(){
-		
 			
-			form.attr("action", "/board/modify").attr("method", "post").submit();
+			if(!confirm("정말로 삭제하시겠습니까?")){
+				return;
+			}
+			
+			form.attr("action", "/board/remove").attr("method", "post").submit();
 			
 		});
 		

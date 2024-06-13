@@ -65,6 +65,7 @@ public class BoardServiceImpl implements BoardService {
 	public void modify(BoardDTO dto) {
 		
 		Optional<Board> result = repository.findById(dto.getNo());
+		
 		// 확인하고 저장해야하는 이유: 같은 화면을 공유 중인 두 사용자가 한명은 삭제 한명은 수정 할때 오류 발생을 잡기 위해
 		if(result.isPresent()) {
 			// 제목과 내용만 변경(사용자가 바꿀 수 있는 데이터)
@@ -75,6 +76,18 @@ public class BoardServiceImpl implements BoardService {
 			repository.save(entity);
 		}
 		
+	}
+
+	@Override
+	public int remove(int no) {
+		
+		Optional<Board> result = repository.findById(no);
+		
+		if (result.isPresent()) {
+			repository.deleteById(no);
+			return 1; // 성공
+		}
+		return 0; // 실패
 	}
 
 }

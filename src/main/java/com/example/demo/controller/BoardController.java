@@ -99,6 +99,14 @@ public class BoardController {
 		return "redirect:/board/read";
 	}
 	
+	// 게시물 삭제하는 메소드
+	@PostMapping("/remove")
+	public String removePost(@RequestParam(name = "no") int no) {
+		
+		service.remove(no);
+		
+		return "redirect:/board/list";
+	}
 }
 
 
